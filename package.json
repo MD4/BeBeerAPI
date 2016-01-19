@@ -1,0 +1,34 @@
+{
+  "name": "bebeerapi",
+  "version": "1.0.0",
+  "description": "BeBeer API !",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "mocha test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MD4/BeBeerAPI.git"
+  },
+  "keywords": [
+    "beer",
+    "api",
+    "rest"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MD4/BeBeerAPI/issues"
+  },
+  "homepage": "https://github.com/MD4/BeBeerAPI#readme",
+  "dependencies": {
+    "async": "^1.5.2",
+    "mongodb": "^2.1.4",
+    "restify": "^4.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  }
+}
