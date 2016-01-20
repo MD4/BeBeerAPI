@@ -43,6 +43,7 @@ Object
             server[controller[actionName].method](
                 controller[actionName].url,
                 function (req, res, next) {
+                    res.charSet('utf-8');
                     controller[actionName].action(
                         req,
                         function (err, result) {
