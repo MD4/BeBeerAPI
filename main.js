@@ -18,7 +18,7 @@ async.series([
     DatabaseHelper.initialize
 ], function (err) {
     if (err) {
-        return console.error('Unable to start server.\nCause:\n', err);
+        return console.error('Unable to start server.\nCause: %s', err);
     }
     server.listen(8080, function () {
         console.log('%s listening at %s', server.name, server.url);

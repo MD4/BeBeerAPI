@@ -64,7 +64,7 @@ function getBeer(id, callback) {
                 return callback(new restify.errors.InternalServerError());
             }
             if (!result) {
-                return callback(new restify.errors.ResourceNotFoundError('No beer with id ' + id));
+                return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', id));
             }
             callback(null, result);
         });
