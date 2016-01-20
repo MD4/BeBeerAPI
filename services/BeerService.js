@@ -57,7 +57,15 @@ function getBeers(options, callback) {
 function getBeer(id, callback) {
     DatabaseHelper
         .getCollection(DatabaseHelper.CollectionsNames.BEERS)
-        .find({_id: +id})
+        .find({_id: +id}, 2)
         .limit(1)
-        .next(callback);
+        .next(function(err, result) {
+            if (err) {
+                return callback(new restify.errors.InternalServerError());
+            }
+            if (!result) {
+                return callback(new restify.errors.ResourceNotFoundError('No beer with id ' + id));
+            }
+            callback(null, result);
+        });
 }
