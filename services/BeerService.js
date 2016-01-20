@@ -57,7 +57,7 @@ function getBeers(options, callback) {
 function getBeer(id, callback) {
     DatabaseHelper
         .getCollection(DatabaseHelper.CollectionsNames.BEERS)
-        .find({_id: +id}, 2)
+        .find({_id: +id})
         .limit(1)
         .next(function(err, result) {
             if (err) {

@@ -8,7 +8,11 @@ describe('Beer service', function () {
         async.series([
             DatabaseHelper.connect,
             DatabaseHelper.initialize
-        ], function () {
+        ], function (err) {
+            if (err) {
+                console.error(err);
+            }
+            expect(err).to.not.exist;
             done();
         });
     });
