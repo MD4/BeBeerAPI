@@ -13,27 +13,11 @@ function getBeers(options, callback) {
     options.count = options.count || 20;
     options.offset = options.offset || 0;
 
-    if (options.count < 1 || options.count > 30) {
-        return callback(new restify.errors.InvalidArgumentError({
-            message: 'Count must be in range [1-30].'
-        }));
-    }
-    if (options.offset < 0) {
-        return callback(new restify.errors.InvalidArgumentError({
-            message: 'Offset must be positive.'
-        }));
-    }
-    if (options.searchByName.length > 50) {
-        return callback(new restify.errors.InvalidArgumentError({
-            message: 'Search length must be less than 50 caracters.'
-        }));
-    }
-
     var query = {};
 
     if (options.searchByName) {
         query.name = {
-            '$regex': new RegExp(options.searchByName, 'g')
+            '$regex': new RegExp(options.searchByName, 'gi')
         };
     }
 
