@@ -32,8 +32,8 @@ function getBeers(options, callback) {
     var query = {};
 
     if (options.searchByName) {
-        query['$text'] = {
-            '$search': options.searchByName
+        query.name = {
+            '$regex': new RegExp(options.searchByName, 'g')
         };
     }
 
