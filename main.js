@@ -1,6 +1,9 @@
 var restify = require('restify');
 var async = require('async');
+var revalidator = require('revalidator');
+
 var DatabaseHelper = require('./helpers/DatabaseHelper');
+var Schemas = require('./controllers/schemas/Schemas');
 
 var server = restify.createServer({
     name: 'bebeerapi',
@@ -43,6 +46,26 @@ Object
             server[controller[actionName].method](
                 controller[actionName].url,
                 function (req, res, next) {
+                    var validation = revalidator.validate(
+                        {
+                            params: req.params,
+                            body: req.body
+                        },
+                        Schemas[controllerName][actionName],
+                        {
+                            cast: true
+                        }
+                    );
+                    if (!validation.valid) {
+                        res.statusCode = 400;
+                        res.send({
+                            code: 'InvalidRequest',
+                            message: 'The sent request is invalid.',
+                            errors: validation.errors
+                        });
+                        return ;
+                    }
+
                     res.charSet('utf-8');
                     controller[actionName].action(
                         req,
