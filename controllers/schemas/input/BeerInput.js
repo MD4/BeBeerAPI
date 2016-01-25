@@ -1,6 +1,5 @@
 var CommonSchemas = require('./CommonSchemas');
 
-
 module.exports.getBeers = {
     properties: {
         params: {

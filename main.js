@@ -1,6 +1,7 @@
 var restify = require('restify');
 var async = require('async');
 var revalidator = require('revalidator');
+var PotatoMasher = require('potato-masher');
 
 var DatabaseHelper = require('./helpers/DatabaseHelper');
 var Schemas = require('./controllers/schemas/Schemas');
@@ -13,6 +14,12 @@ var server = restify.createServer({
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
+
+server.on('uncaughtException', function (req, res, route, error) {
+    console.error(route);
+    console.error(error.stack);
+    res.send(new restify.errors.InternalServerError('Something wrong happened!'));
+});
 
 // database initialization
 
@@ -51,10 +58,12 @@ Object
                             params: req.params,
                             body: req.body
                         },
-                        Schemas[controllerName][actionName],
-                        {
-                            cast: true
-                        }
+                        Schemas.input[controllerName][actionName],
+                        {cast: true}
+                    );
+                    var mapper = PotatoMasher.cmap(
+                        Schemas.output[controllerName][actionName],
+                        {keep: true, removeChanged: true}
                     );
                     if (!validation.valid) {
                         res.statusCode = 400;
@@ -63,7 +72,7 @@ Object
                             message: 'The sent request is invalid.',
                             errors: validation.errors
                         });
-                        return ;
+                        return;
                     }
 
                     res.charSet('utf-8');
@@ -73,7 +82,13 @@ Object
                             if (err) {
                                 return next(err);
                             }
-                            res.send(result || undefined);
+                            result = result || undefined;
+                            if (result instanceof Array) {
+                                result = result.map(mapper);
+                            } else {
+                                result = mapper(result);
+                            }
+                            res.send(result);
                             return next();
                         }
                     );
