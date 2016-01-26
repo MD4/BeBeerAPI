@@ -30,12 +30,15 @@ function getCollection(name) {
 }
 
 function connect(callback) {
-    var url = 'mongodb://' + config.db.host + ':' + config.db.port + '/' + config.db.name;
+    var uri = config.db.uri;
 
-    MongoClient.connect(url, function (err, database) {
-        db = database;
-        callback(err);
-    });
+    MongoClient.connect(
+        uri,
+        function (err, database) {
+            db = database;
+            callback(err);
+        }
+    );
 }
 
 function initialize(callback) {

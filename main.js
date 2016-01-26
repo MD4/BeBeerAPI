@@ -3,13 +3,14 @@ var async = require('async');
 var revalidator = require('revalidator');
 var PotatoMasher = require('potato-masher');
 
+var config = require('./config/config');
+
 var DatabaseHelper = require('./helpers/DatabaseHelper');
 var Schemas = require('./controllers/schemas/Schemas');
 
-var server = restify.createServer({
-    name: 'bebeerapi',
-    version: '1.0.0'
-});
+var configControllers = require('./controllers/config/controllers');
+
+var server = restify.createServer(config.api.info);
 
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
@@ -30,29 +31,26 @@ async.series([
     if (err) {
         return console.error('Unable to start server.\nCause: %s', err);
     }
-    server.listen(8080, function () {
-        console.log('%s listening at %s', server.name, server.url);
-    });
+    server.listen(
+        config.api.port,
+        function () {
+            console.log('%s listening at %s', server.name, server.url);
+        }
+    );
 });
 
 // url mapping
 
-var configControllers = {
-    BeerController: [
-        'getBeers',
-        'getBeer'
-    ]
-};
-
 Object
     .keys(configControllers)
     .forEach(function (controllerName) {
-        var controller = require('./controllers/' + controllerName);
+        var controller = require('./controllers/' + controllerName + 'Controller');
         var actions = configControllers[controllerName];
         actions.forEach(function (actionName) {
             server[controller[actionName].method](
                 controller[actionName].url,
                 function (req, res, next) {
+                    console.log(Schemas);
                     var validation = revalidator.validate(
                         {
                             params: req.params,

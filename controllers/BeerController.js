@@ -3,12 +3,12 @@ var HTTPMethod = require('../constants/HTTPMethod');
 
 // exports
 
-module.exports.getBeers = getBeers();
-module.exports.getBeer = getBeer();
+module.exports.getBeers = _getBeers();
+module.exports.getBeer = _getBeer();
 
 // private
 
-function getBeers() {
+function _getBeers() {
     return {
         method: HTTPMethod.GET,
         url: '/beers',
@@ -25,7 +25,7 @@ function getBeers() {
     };
 }
 
-function getBeer() {
+function _getBeer() {
     return {
         method: HTTPMethod.GET,
         url: '/beers/:id',
