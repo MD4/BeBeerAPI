@@ -1,3 +1,3 @@
-module.exports.getBreweries = {};
-
-module.exports.getBrewery = {};
+module.exports.getBreweries = {
+    name: '_id'
+};

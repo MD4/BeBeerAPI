@@ -25,7 +25,7 @@ function getBreweries(options, callback) {
         .aggregate([
             {'$match': query},
             {'$sort': {name: 1}},
-            {'$group': {_id: '$brewery'}},
+            {'$group': {_id: '$brewery', country: {'$first': '$country'}}},
             {'$skip': options.offset},
             {'$limit': options.count}
         ])
