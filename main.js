@@ -3,6 +3,11 @@ var async = require('async');
 var revalidator = require('revalidator');
 var PotatoMasher = require('potato-masher');
 
+var session = require('express-session')
+var MongoStore = require('connect-mongo')({
+    session: session
+});
+
 var config = require('./config/config');
 
 var DatabaseHelper = require('./helpers/DatabaseHelper');
@@ -15,6 +20,16 @@ var server = restify.createServer(config.api.info);
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
+
+server.use(session({
+    saveUninitialized: true,
+    resave: true,
+    secret: config.api.secret,
+    store: new MongoStore({
+        url: config.db.uri,
+        collection: config.db.sessionCollection
+    })
+}));
 
 server.on('uncaughtException', function (req, res, route, error) {
     console.error(route);

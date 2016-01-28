@@ -24,8 +24,10 @@
   "homepage": "https://github.com/MD4/BeBeerAPI#readme",
   "dependencies": {
     "async": "^1.5.2",
+    "connect-mongo": "^1.1.0",
+    "express-session": "^1.13.0",
     "mongodb": "^2.1.4",
-    "potato-masher": "^0.1.0",
+    "potato-masher": "^0.1.0",²
     "restify": "^4.0.3",
     "revalidator": "^0.3.1"
   },
