@@ -4,7 +4,6 @@ module.exports = {
         'getBeer'
     ],
     Brewery: [
-        'getBreweries',
-        'getBrewery'
+        'getBreweries'
     ]
 };
