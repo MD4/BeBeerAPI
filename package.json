@@ -27,7 +27,7 @@
     "connect-mongo": "^1.1.0",
     "express-session": "^1.13.0",
     "mongodb": "^2.1.4",
-    "potato-masher": "^0.1.0",²
+    "potato-masher": "^0.1.0",
     "restify": "^4.0.3",
     "revalidator": "^0.3.1"
   },
