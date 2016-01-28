@@ -13,8 +13,6 @@ function _getBeers() {
         method: HTTPMethod.GET,
         url: '/beers',
         action: function (req, callback) {
-            var session = req.session;
-            session.lol = Math.round(Math.random() * 100);
             BeerService.getBeers(
                 {
                     offset: +req.params.offset,
