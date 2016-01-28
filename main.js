@@ -65,7 +65,6 @@ Object
             server[controller[actionName].method](
                 controller[actionName].url,
                 function (req, res, next) {
-                    console.log(Schemas);
                     var validation = revalidator.validate(
                         {
                             params: req.params,
