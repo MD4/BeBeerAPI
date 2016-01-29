@@ -1,7 +1,9 @@
 var expect = require('chai').expect;
+var async = require('async');
+
+var config = require('../config/configTest');
 var BreweryService = require('../services/BreweryService');
 var DatabaseHelper = require('../helpers/DatabaseHelper');
-var async = require('async');
 
 describe('Brewery service', function () {
     before(function (done) {

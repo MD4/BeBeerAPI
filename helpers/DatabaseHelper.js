@@ -13,24 +13,24 @@ var CollectionsNames = {
 
 module.exports.CollectionsNames = CollectionsNames;
 
-module.exports.getDB = getDB;
-module.exports.getCollection = getCollection;
-module.exports.connect = connect;
-module.exports.initialize = initialize;
-module.exports.finalize = finalize;
+module.exports.getDB = _getDB;
+module.exports.getCollection = _getCollection;
+module.exports.connect = _connect;
+module.exports.initialize = _initialize;
+module.exports.finalize = _finalize;
 
 // private
 
-function getDB() {
+function _getDB() {
     return db;
 }
 
-function getCollection(name) {
+function _getCollection(name) {
     return db.collection(name);
 }
 
-function connect(callback) {
-    var uri = config.db.uri;
+function _connect(callback) {
+    var uri = config.db.uri + (config.api.test ? 'Test' : '');
 
     MongoClient.connect(
         uri,
@@ -41,12 +41,12 @@ function connect(callback) {
     );
 }
 
-function initialize(callback) {
+function _initialize(callback) {
     callback = callback || function () {
         };
 
     console.info('Database initialization :');
-    var beers = getCollection(CollectionsNames.BEERS);
+    var beers = _getCollection(CollectionsNames.BEERS);
 
     async.waterfall([
         function (cb) {
@@ -81,6 +81,6 @@ function initialize(callback) {
     });
 }
 
-function finalize() {
+function _finalize() {
     db.close();
 }
