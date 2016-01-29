@@ -2,9 +2,9 @@
   "name": "bebeerapi",
   "version": "1.0.0",
   "description": "BeBeer API !",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node main.js",
+    "start": "node app.js",
     "test": "mocha test/**/*.js"
   },
   "repository": {
