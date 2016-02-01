@@ -4,7 +4,7 @@
   "description": "BeBeer API !",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node bin/www",
     "test": "mocha test/**/*.js"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "express-session": "^1.13.0",
     "mongodb": "^2.1.4",
     "potato-masher": "^0.1.0",
+    "recluster": "^0.4.5",
     "restify": "^4.0.3",
     "revalidator": "^0.3.1"
   },
