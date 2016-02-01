@@ -5,5 +5,8 @@ module.exports = {
     ],
     Brewery: [
         'getBreweries'
+    ],
+    Root: [
+        'get'
     ]
 };
