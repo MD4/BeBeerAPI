@@ -10,14 +10,15 @@ var DatabaseHelper = require('./helpers/DatabaseHelper');
 var processColor = Math.round(Math.random() * 200);
 
 [
-    'debug',
+    'log',
     'info',
-    'log'
+    'error',
+    'warn'
 ].forEach(patchConsoleFunction);
 
 function patchConsoleFunction(fnName) {
-    (function(fn) {
-        console[fnName] = function() {
+    (function (fn) {
+        console[fnName] = function () {
             var args = Array.prototype.slice.apply(arguments);
             args[0] = ' \u001b[38;5;' + processColor + 'm[' + process.pid + ']\u001b[0m ' + args[0];
             fn.apply(console, args);
