@@ -1,4 +1,7 @@
 module.exports = {
+    Root: [
+        'get'
+    ],
     Beer: [
         'getBeers',
         'getBeer'
@@ -6,7 +9,13 @@ module.exports = {
     Brewery: [
         'getBreweries'
     ],
-    Root: [
-        'get'
+    User: [
+        'createUser',
+        'getUser'
+    ],
+    Auth: [
+        'auth',
+        'getAuth',
+        'deleteAuth'
     ]
 };

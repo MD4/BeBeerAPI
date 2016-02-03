@@ -48,7 +48,7 @@ function _ActionHandler(controller, controllerName, actionName) {
                 result = result || undefined;
                 if (result instanceof Array) {
                     result = result.map(mapper);
-                } else {
+                } else if(result !== undefined) {
                     result = mapper(result);
                 }
                 res.send(result);

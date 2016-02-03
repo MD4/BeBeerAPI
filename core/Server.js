@@ -23,6 +23,12 @@ function _Server(config, configControllers) {
     this.api.use(restify.queryParser());
     this.api.use(restify.bodyParser());
 
+    this.api.use(function(req, res, next) {
+        req.body = req.body || {};
+        req.params = req.params || {};
+        next();
+    });
+
     this.api.use(session({
         saveUninitialized: true,
         resave: true,
@@ -58,7 +64,9 @@ _Server.prototype.mapUrls = function () {
             var controller = require('../controllers/' + controllerName + 'Controller');
             var actions = this.configControllers[controllerName];
             actions.forEach(function (actionName) {
-                this.api[controller[actionName].method](
+                var action = controller[actionName];
+                console.log('URL MAPPING] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
+                this.api[action.method](
                     controller[actionName].url,
                     new ActionHandler(controller, controllerName, actionName)
                 );

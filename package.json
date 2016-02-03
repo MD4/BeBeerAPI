@@ -27,6 +27,8 @@
     "connect-mongo": "^1.1.0",
     "express-session": "^1.13.0",
     "mongodb": "^2.1.4",
+    "passport": "^0.3.2",
+    "passport-google": "^0.3.0",
     "potato-masher": "^0.1.0",
     "recluster": "^0.4.5",
     "restify": "^4.0.3",

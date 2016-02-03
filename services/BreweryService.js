@@ -3,11 +3,11 @@ var restify = require('restify');
 
 // exports
 
-module.exports.getBreweries = getBreweries;
+module.exports.getBreweries = _getBreweries;
 
 // private
 
-function getBreweries(options, callback) {
+function _getBreweries(options, callback) {
     options.searchByName = options.searchByName || '';
     options.count = options.count || 20;
     options.offset = options.offset || 0;
