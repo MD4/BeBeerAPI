@@ -5,7 +5,7 @@ module.exports = {
             version: '1.0.0'
         },
         port: process.env['PORT'] || 8081,
-        secret:  process.env['SECRET'] || 'this is not the production secret lol',
+        secret: process.env['SECRET'] || 'this is not the production secret lol',
         test: false
     },
     db: {
