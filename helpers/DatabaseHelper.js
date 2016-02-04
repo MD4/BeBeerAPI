@@ -6,13 +6,15 @@ var merge = require('../data/merge');
 var db;
 
 var CollectionsNames = {
-    BEERS: 'beers'
+    BEERS: 'beers',
+    USERS: 'users'
 };
 
 // exports
 
 module.exports.CollectionsNames = CollectionsNames;
 
+module.exports.enableTestMode = _enableTestMode;
 module.exports.getDB = _getDB;
 module.exports.getCollection = _getCollection;
 module.exports.connect = _connect;
@@ -20,6 +22,12 @@ module.exports.initialize = _initialize;
 module.exports.finalize = _finalize;
 
 // private
+
+function _enableTestMode(cb) {
+    config = require('../config/configTest');
+    console.log('Test mode enabled.');
+    cb();
+}
 
 function _getDB() {
     return db;
@@ -31,6 +39,8 @@ function _getCollection(name) {
 
 function _connect(callback) {
     var uri = config.db.uri + (config.api.test ? 'Test' : '');
+
+    console.log('Database connection: %s', uri);
 
     MongoClient.connect(
         uri,
@@ -44,6 +54,10 @@ function _connect(callback) {
 function _initialize(callback) {
     callback = callback || function () {
         };
+
+    if (config.api.test) {
+        db.dropDatabase();
+    }
 
     console.info('Database initialization :');
     var beers = _getCollection(CollectionsNames.BEERS);

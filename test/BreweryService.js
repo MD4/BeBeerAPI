@@ -1,13 +1,13 @@
 var expect = require('chai').expect;
 var async = require('async');
 
-var config = require('../config/configTest');
 var BreweryService = require('../services/BreweryService');
 var DatabaseHelper = require('../helpers/DatabaseHelper');
 
 describe('Brewery service', function () {
     before(function (done) {
         async.series([
+            DatabaseHelper.enableTestMode,
             DatabaseHelper.connect,
             DatabaseHelper.initialize
         ], function (err) {
