@@ -10,6 +10,8 @@ module.exports.auth = _auth();
 module.exports.getAuth = _getAuth();
 module.exports.deleteAuth = _deleteAuth();
 
+module.exports.getAuthUser = _getAuthUser;
+
 // private
 
 function _auth() {
@@ -38,7 +40,7 @@ function _getAuth() {
         method: HTTPMethod.GET,
         url: '/auth',
         action: function (req, callback) {
-            if (!req.session.user) {
+            if (!_getAuthUser(req)) {
                 return callback(new restify.errors.UnauthorizedError());
             }
             callback(null, req.session.user);
@@ -51,11 +53,15 @@ function _deleteAuth() {
         method: HTTPMethod.DELETE,
         url: '/auth',
         action: function (req, callback) {
-            if (!req.session.user) {
+            if (!_getAuthUser(req)) {
                 return callback(new restify.errors.UnauthorizedError());
             }
             delete req.session.user;
             callback();
         }
     };
+}
+
+function _getAuthUser(req) {
+    return ((req && req.session) ? req.session.user : null);
 }

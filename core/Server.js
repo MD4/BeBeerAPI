@@ -63,12 +63,13 @@ _Server.prototype.mapUrls = function () {
         .forEach(function (controllerName) {
             var controller = require('../controllers/' + controllerName + 'Controller');
             var actions = this.configControllers[controllerName];
-            actions.forEach(function (actionName) {
+            actions.forEach(function (actionConfig) {
+                var actionName = actionConfig.action;
                 var action = controller[actionName];
                 console.log('URL MAPPING] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
                 this.api[action.method](
                     controller[actionName].url,
-                    new ActionHandler(controller, controllerName, actionName)
+                    new ActionHandler(controller, controllerName, actionConfig)
                 );
             }.bind(this));
         }.bind(this));

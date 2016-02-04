@@ -1,7 +1,11 @@
 var revalidator = require('revalidator');
 var PotatoMasher = require('potato-masher');
+var restify = require('restify');
 
 var Schemas = require('../controllers/schemas/Schemas');
+var MethodVisibility = require('../constants/MethodVisibility');
+
+var AuthController = require('../controllers/AuthController');
 
 // exports
 
@@ -9,9 +13,15 @@ module.exports = _ActionHandler;
 
 // private
 
-function _ActionHandler(controller, controllerName, actionName) {
+function _ActionHandler(controller, controllerName, actionConfig) {
     return function(req, res, next) {
+        var actionName = actionConfig.action;
         res.charSet('utf-8');
+
+        if(actionConfig.visibility === MethodVisibility.PRIVATE) {
+            if (!AuthController.getAuthUser(req))
+            return next(new restify.errors.UnauthorizedError('You must be logged in to do this.'));
+        }
 
         // Input validator
         var validation = revalidator.validate(
