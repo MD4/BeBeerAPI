@@ -2,6 +2,8 @@ var DatabaseHelper = require('../helpers/DatabaseHelper');
 var ErrorHelper = require('../helpers/ErrorHelper');
 var SecurityHelper = require('../helpers/SecurityHelper');
 
+var UserService = require('./UserService');
+
 var restify = require('restify');
 
 // exports
@@ -15,10 +17,11 @@ function _check(username, password, callback) {
         .getCollection(DatabaseHelper.CollectionsNames.USERS)
         .find({
             _id: username,
-            password: SecurityHelper.hash(password)
+            password: SecurityHelper.sha1(password)
         }, {
             password: false
         })
+        .map(UserService.getGravatarizedUser)
         .limit(1)
         .next(function (err, result) {
             if (err) {
