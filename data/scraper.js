@@ -4,7 +4,7 @@ var urls = artoo.scrape('a', function() {
 		title: this.getAttribute('text'),
 		url: this.getAttribute('href')
 	};
-}).filter(function(beer){ return !!beer; }).map(function(beer){return beer.url});
+}).filter(function(beer){ return !!beer; }).map(function(beer){return beer.url;});
 
 var images = artoo.scrape('a', function() {
 	if (this.getAttribute('href').indexOf('../biere/index.php?num_biere=') === -1) return;
@@ -62,7 +62,7 @@ artoo.ajaxSpider(
 			}
 			return {
 				name: epure($(data).find('div[id="titre"]').text()),
-				country: epure($(data).find('a[title="voir toutes les bi�res not�es de ce pays"]').text()),
+				country: epure($(data).find('a[title="voir toutes les bières notées de ce pays"]').text()),
 				brewery: epure($(data).find('a[title="voir la fiche de cette brasserie"]').text()),
 				comment: epure($(data).find('p[itemprop="reviewBody"]').text()),
 				grades: {
@@ -74,7 +74,7 @@ artoo.ajaxSpider(
 					.innerHTML
 					.split('<br>')
 					.map(epure)
-			}
+			};
 		},
 		limit: urls.length
 	},

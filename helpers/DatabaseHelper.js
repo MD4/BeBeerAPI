@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
 var async = require('async');
-var Error = require('../errors/Error');
 var config = require('../config/config');
 var merge = require('../data/merge');
 var db;

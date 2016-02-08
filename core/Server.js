@@ -1,5 +1,5 @@
 var restify = require('restify');
-var session = require('express-session')
+var session = require('express-session');
 var MongoStore = require('connect-mongo')({
     session: session
 });

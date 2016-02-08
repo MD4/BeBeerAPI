@@ -22,6 +22,6 @@ module.exports.getMergedData = function() {
             fermentation: beer.fermentation,
             shortDescription: beer.shortDescription,
             image: 'http://www.guide-biere.fr/biere/illustrations/' + images.id + '.JPG'
-        }
+        };
     });
 };

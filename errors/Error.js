@@ -1,8 +1,8 @@
-var Error = function (type, message) {
+var CustomError = function (type, message) {
     this.type = type;
     this.message = message;
 };
 
-Error.INFO = 'info';
+CustomError.INFO = 'info';
 
-module.exports = Error;
+module.exports = CustomError;

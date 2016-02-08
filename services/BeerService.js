@@ -180,7 +180,7 @@ function _rateBeer(userId, beerId, rate, callback) {
                         }
                     },
                     cb
-                )
+                );
         }
     ], function (err) {
         callback(err);

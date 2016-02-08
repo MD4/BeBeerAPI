@@ -54,7 +54,7 @@ function _rateBeer() {
                         req.params.id,
                         req.body.rating,
                         cb
-                    )
+                    );
                 },
                 function(cb) {
                     AuthController.updateAuthUser(req, cb);
