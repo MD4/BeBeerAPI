@@ -18,7 +18,7 @@ function _ActionHandler(controller, controllerName, actionConfig) {
         var actionName = actionConfig.action;
         res.charSet('utf-8');
 
-        console.log('[REQUEST] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
+        console.log('[REQUEST] %s:%s', controllerName, actionName);
 
         if(actionConfig.visibility === MethodVisibility.PRIVATE) {
             if (!AuthController.getAuthUser(req))
