@@ -48,30 +48,7 @@ function _getBeers(options, callback) {
 function _getBeer(id, callback) {
     DatabaseHelper
         .getCollection(DatabaseHelper.CollectionsNames.BEERS)
-        .aggregate([
-            {$match: {_id: +id}},
-            {
-                $project: {
-                    '_id': true,
-                    'name': true,
-                    'country': true,
-                    'brewery': true,
-                    'comment': true,
-                    'taste': true,
-                    'notes': true,
-                    'fermentation': true,
-                    'shortDescription': true,
-                    'image': true,
-
-                    'grades.taste': true,
-                    'grades.thirsty': true,
-                    'grades.bitterness': true,
-
-                    'ratings.last': '$ratings',
-                    'ratings.average': {'$avg': '$ratings.rate'}
-                }
-            }
-        ])
+        .find({_id: +id})
         .limit(1)
         .next(function (err, result) {
             if (err) {
@@ -79,6 +56,15 @@ function _getBeer(id, callback) {
             }
             if (!result) {
                 return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', id));
+            }
+            if (result.ratings) {
+                result.ratings = {
+                    average: result.ratings
+                        .reduce(function (memo, rating) {
+                            return memo + rating.rate
+                        }, 0) / result.ratings.length,
+                    last: result.ratings.slice(-3)
+                };
             }
             callback(null, result);
         });
