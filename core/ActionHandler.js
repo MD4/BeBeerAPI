@@ -18,6 +18,8 @@ function _ActionHandler(controller, controllerName, actionConfig) {
         var actionName = actionConfig.action;
         res.charSet('utf-8');
 
+        console.log('[REQUEST] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
+
         if(actionConfig.visibility === MethodVisibility.PRIVATE) {
             if (!AuthController.getAuthUser(req))
             return next(new restify.errors.UnauthorizedError('You must be logged in to do this.'));

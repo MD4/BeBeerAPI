@@ -66,7 +66,7 @@ _Server.prototype.mapUrls = function () {
             actions.forEach(function (actionConfig) {
                 var actionName = actionConfig.action;
                 var action = controller[actionName];
-                console.log('URL MAPPING] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
+                console.log('[URL MAPPING] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
                 this.api[action.method](
                     controller[actionName].url,
                     new ActionHandler(controller, controllerName, actionConfig)
