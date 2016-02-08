@@ -7,6 +7,7 @@ module.exports.handleError = _handleError;
 // private
 
 function _handleError(err) {
+    console.error(err);
     switch (err.code) {
         case 11000:
             return new restify.errors.ConflictError('Duplicated id');
