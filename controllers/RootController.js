@@ -17,7 +17,7 @@ function _get() {
         action: function (req, callback) {
             callback(null, {
                 api: config.api.info,
-                actions: _getActions()
+                actions: _actions
             });
         }
     };

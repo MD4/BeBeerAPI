@@ -1,8 +1,11 @@
-var async = require('async');
 var restify = require('restify');
 
 var AuthService = require('../services/AuthService');
+var UserService = require('../services/UserService');
+
 var HTTPMethod = require('../constants/HTTPMethod');
+
+var ErrorHelper = require('../helpers/ErrorHelper');
 
 // exports
 
@@ -11,6 +14,7 @@ module.exports.getAuth = _getAuth();
 module.exports.deleteAuth = _deleteAuth();
 
 module.exports.getAuthUser = _getAuthUser;
+module.exports.updateAuthUser = _updateAuthUser;
 
 // private
 
@@ -64,4 +68,21 @@ function _deleteAuth() {
 
 function _getAuthUser(req) {
     return ((req && req.session) ? req.session.user : null);
+}
+
+function _updateAuthUser(req, callback) {
+    UserService
+        .getUser(
+            _getAuthUser(req)._id,
+            function (err, user) {
+                if (err) {
+                    return callback(ErrorHelper.handleError(err));
+                }
+                if (!user) {
+                    return callback(ErrorHelper.ResourceNotFoundError());
+                }
+                req.session.user = user;
+                callback(null, user);
+            }
+        );
 }

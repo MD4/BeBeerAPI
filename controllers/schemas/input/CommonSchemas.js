@@ -30,6 +30,13 @@ module.exports = {
         minLength: 6,
         maxLength: 50,
         required: true
+    },
+
+    rating: {
+        type: 'integer',
+        minimum: 0,
+        maximum: 5,
+        required: true
     }
 
 };

@@ -37,3 +37,20 @@ module.exports.getBeer = {
         }
     }
 };
+
+module.exports.rateBeer = {
+    properties: {
+        params: {
+            type: 'object',
+            properties: {
+                id: CommonSchemas.beerId
+            }
+        },
+        body: {
+            type: 'object',
+            properties: {
+                rating: CommonSchemas.rating
+            }
+        }
+    }
+};

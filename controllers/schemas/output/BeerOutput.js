@@ -5,3 +5,5 @@ module.exports.getBeers = {
 module.exports.getBeer = {
     id: '_id'
 };
+
+module.exports.rateBeer = {};

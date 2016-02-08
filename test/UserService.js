@@ -72,7 +72,6 @@ describe('User service', function () {
         it('Returns an existing user', function () {
             expect(user).to.exist;
             expect(user._id).to.equal('Lol42');
-            expect(user.email).to.equal('lol@lolilol.fr');
         });
     });
 

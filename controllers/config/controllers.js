@@ -6,7 +6,8 @@ module.exports = {
     ],
     Beer: [
         {action: 'getBeers', visibility: MethodVisibility.PRIVATE},
-        {action: 'getBeer', visibility: MethodVisibility.PRIVATE}
+        {action: 'getBeer', visibility: MethodVisibility.PRIVATE},
+        {action: 'rateBeer', visibility: MethodVisibility.PRIVATE}
     ],
     Brewery: [
         {action: 'getBreweries', visibility: MethodVisibility.PRIVATE}
