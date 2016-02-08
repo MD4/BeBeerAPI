@@ -67,8 +67,8 @@ function _getBeer(id, callback) {
                     'grades.thirsty': true,
                     'grades.bitterness': true,
 
-                    'ratings.last': {'$slice': ['$grades.users', 3]},
-                    'ratings.average': {'$avg': '$grades.users.rate'}
+                    'ratings.last': '$ratings',
+                    'ratings.average': {'$avg': '$ratings.rate'}
                 }
             }
         ])
@@ -113,7 +113,7 @@ function _unrateBeer(userId, beerId, callback) {
                     {_id: +beerId},
                     {
                         $pull: {
-                            'grades.users': {
+                            'ratings': {
                                 username: userId
                             }
                         }
@@ -147,7 +147,7 @@ function _rateBeer(userId, beerId, rate, callback) {
                     {_id: +beerId},
                     {
                         '$push': {
-                            'grades.users': {
+                            'ratings': {
                                 username: userId,
                                 date: ratingDate,
                                 rate: rate
