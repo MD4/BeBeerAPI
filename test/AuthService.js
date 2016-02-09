@@ -6,6 +6,8 @@ var AuthService = require('../services/AuthService');
 var DatabaseHelper = require('../helpers/DatabaseHelper');
 
 describe('User service', function () {
+    this.timeout(15000);
+
     before(function (done) {
         async.series([
             DatabaseHelper.enableTestMode,

@@ -6,6 +6,8 @@ var UserService = require('../services/UserService');
 var DatabaseHelper = require('../helpers/DatabaseHelper');
 
 describe('Beer service', function () {
+    this.timeout(15000);
+
     before(function (done) {
         async.series([
             DatabaseHelper.enableTestMode,
