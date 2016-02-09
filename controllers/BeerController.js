@@ -9,6 +9,7 @@ var async = require('async');
 module.exports.getBeers = _getBeers();
 module.exports.getBeer = _getBeer();
 module.exports.rateBeer = _rateBeer();
+module.exports.getRatings = _getRatings();
 
 // private
 
@@ -62,6 +63,19 @@ function _rateBeer() {
             ], function(err) {
                 callback(err);
             });
+        }
+    };
+}
+
+function _getRatings() {
+    return {
+        method: HTTPMethod.GET,
+        url: '/beers/:id/ratings',
+        action: function (req, callback) {
+            BeerService.getRatings(
+                req.params.id,
+                callback
+            );
         }
     };
 }

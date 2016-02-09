@@ -12,6 +12,7 @@ var restify = require('restify');
 module.exports.getBeers = _getBeers;
 module.exports.getBeer = _getBeer;
 module.exports.rateBeer = _rateBeer;
+module.exports.getRatings = _getRatings;
 
 // private
 
@@ -61,7 +62,7 @@ function _getBeer(id, callback) {
                 result.ratings = {
                     average: result.ratings
                         .reduce(function (memo, rating) {
-                            return memo + rating.rate
+                            return memo + rating.rate;
                         }, 0) / result.ratings.length,
                     last: result.ratings.slice(-3)
                 };
@@ -171,6 +172,29 @@ function _rateBeer(userId, beerId, rate, callback) {
     ], function (err) {
         callback(err);
     });
+}
 
-
+function _getRatings(beerId, callback) {
+    DatabaseHelper
+        .getCollection(DatabaseHelper.CollectionsNames.BEERS)
+        .aggregate([
+            {$match: {_id: +beerId}},
+            {$project: {ratings: true}},
+            {$unwind: '$ratings'},
+            {$sort: {date: 1}},
+            {$group: {
+                _id: '$_id',
+                ratings: {$push: '$ratings'}
+            }}
+        ])
+        .limit(1)
+        .next(function (err, result) {
+            if (err) {
+                return callback(ErrorHelper.handleError(err));
+            }
+            if (!result) {
+                return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', beerId));
+            }
+            callback(null, result.ratings || []);
+        });
 }

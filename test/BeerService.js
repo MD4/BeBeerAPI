@@ -257,4 +257,22 @@ describe('Beer service', function () {
         });
     });
 
+
+    describe('Get beer ratings', function () {
+        var ratings;
+        before(function (done) {
+            BeerService.getRatings(
+                42,
+                function(err, result) {
+                    console.log(err, result);
+                    ratings = result;
+                    done();
+                }
+            );
+        });
+        it('retrieves a 1-length ratings list', function () {
+            expect(ratings.length).equals(1);
+        });
+    });
+
 });

@@ -54,3 +54,14 @@ module.exports.rateBeer = {
         }
     }
 };
+
+module.exports.getRatings = {
+    properties: {
+        params: {
+            type: 'object',
+            properties: {
+                id: CommonSchemas.beerId
+            }
+        }
+    }
+};

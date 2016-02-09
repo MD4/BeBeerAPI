@@ -7,3 +7,5 @@ module.exports.getBeer = {
 };
 
 module.exports.rateBeer = {};
+
+module.exports.getRatings = {};
