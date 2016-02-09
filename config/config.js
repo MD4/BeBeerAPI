@@ -13,7 +13,7 @@ module.exports = {
         sessionCollection: 'sessions'
     },
     session: {
-        uri: process.env.REDIS_ADDON_URI || 'redis://127.0.0.1:6379',
+        uri: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
         db: 0
     }
 };
