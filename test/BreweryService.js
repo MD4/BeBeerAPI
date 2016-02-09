@@ -63,4 +63,20 @@ describe('Brewery service', function () {
             expect(breweries.length).least(2);
         });
     });
+
+    describe('Get brewery beers', function () {
+        var beers;
+        before(function (done) {
+            BreweryService.getBeers(
+                'br. Huyghe',
+                function (err, results) {
+                    console.log(1, results);
+                    beers = results;
+                    done();
+                });
+        });
+        it('retrieves a 2(or more)-length  beer list', function () {
+            expect(beers.length).least(2);
+        });
+    });
 });

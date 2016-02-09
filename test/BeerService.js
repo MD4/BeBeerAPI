@@ -264,7 +264,6 @@ describe('Beer service', function () {
             BeerService.getRatings(
                 42,
                 function(err, result) {
-                    console.log(err, result);
                     ratings = result;
                     done();
                 }

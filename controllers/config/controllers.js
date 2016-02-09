@@ -11,7 +11,8 @@ module.exports = {
         {action: 'getRatings', visibility: MethodVisibility.PRIVATE}
     ],
     Brewery: [
-        {action: 'getBreweries', visibility: MethodVisibility.PRIVATE}
+        {action: 'getBreweries', visibility: MethodVisibility.PRIVATE},
+        {action: 'getBeers', visibility: MethodVisibility.PRIVATE}
     ],
     User: [
         {action: 'createUser', visibility: MethodVisibility.PUBLIC},
