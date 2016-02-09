@@ -1,12 +1,29 @@
-var recluster = require('recluster'),
-    path = require('path');
+var async = require('async');
+var recluster = require('recluster');
+var path = require('path');
 
-var cluster = recluster(path.join(__dirname, '../app.js'));
-cluster.run();
+var DatabaseHelper = require('../helpers/DatabaseHelper');
 
-process.on('SIGUSR2', function() {
-    console.log('Got SIGUSR2, reloading cluster...');
-    cluster.reload();
+
+console.log('Starting server...');
+
+async.series([
+    DatabaseHelper.connect,
+    DatabaseHelper.initialize
+], function (err) {
+    if (err) {
+        return console.error('Unable to start server.\nCause: %s', err);
+    }
+
+    var cluster = recluster(path.join(__dirname, '../app.js'));
+    cluster.run();
+
+    process.on('SIGUSR2', function() {
+        console.log('Got SIGUSR2, reloading cluster...');
+        cluster.reload();
+    });
+
+    console.log('Spawned BeBeerAPI cluster, kill -s SIGUSR2', process.pid, 'to reload');
 });
 
-console.log('Spawned BeBeerAPI cluster, kill -s SIGUSR2', process.pid, 'to reload');
+

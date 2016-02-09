@@ -1,8 +1,13 @@
+var npmPackage = require('../package.json');
+
 module.exports = {
     api: {
         info: {
-            name: 'bebeerapi',
-            version: '1.0.0'
+            name: npmPackage.name,
+            version: npmPackage.version,
+            repository: npmPackage.repository,
+            bugs: npmPackage.bugs,
+            homepage: npmPackage.homepage
         },
         port: process.env.PORT || 8081,
         secret: process.env.SECRET || 'this is not the production secret lol',

@@ -1,5 +1,3 @@
-var async = require('async');
-
 var config = require('./config/config');
 var configControllers = require('./controllers/config/controllers');
 
@@ -29,10 +27,7 @@ function patchConsoleFunction(fnName) {
 
 // App initialization
 
-async.series([
-    DatabaseHelper.connect,
-    DatabaseHelper.initialize
-], function (err) {
+DatabaseHelper.connect(function (err) {
     if (err) {
         return console.error('Unable to start server.\nCause: %s', err);
     }
