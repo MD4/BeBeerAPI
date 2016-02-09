@@ -1,8 +1,6 @@
 var restify = require('restify');
 var session = require('express-session');
-var MongoStore = require('connect-mongo')({
-    session: session
-});
+var RedisStore = require('connect-redis')(session);
 
 var ActionHandler = require('../core/ActionHandler');
 
@@ -33,9 +31,9 @@ function _Server(config, configControllers) {
         saveUninitialized: true,
         resave: true,
         secret: this.config.api.secret,
-        store: new MongoStore({
-            url: this.config.db.uri,
-            collection: this.config.db.sessionCollection
+        store: new RedisStore({
+            url: this.config.session.uri,
+            db: this.config.session.db
         })
     }));
 

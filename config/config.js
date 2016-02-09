@@ -11,5 +11,9 @@ module.exports = {
     db: {
         uri: process.env.MONGODB_ADDON_URI || 'mongodb://127.0.0.1:27017/bebeer',
         sessionCollection: 'sessions'
+    },
+    session: {
+        uri: process.env.REDIS_ADDON_URI || 'redis://127.0.0.1:6379',
+        db: 0
     }
 };
