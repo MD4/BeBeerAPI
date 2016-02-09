@@ -19,6 +19,6 @@ module.exports = {
     },
     session: {
         uri: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
-        db: 0
+        db: process.env.REDIS_DB || 0
     }
 };
