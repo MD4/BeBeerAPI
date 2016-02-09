@@ -10,6 +10,7 @@ module.exports.getUser = _getUser();
 
 function _createUser() {
     return {
+        description: 'Creates an user with the given data.',
         method: HTTPMethod.POST,
         url: '/users',
         action: function (req, callback) {
@@ -27,6 +28,7 @@ function _createUser() {
 
 function _getUser() {
     return {
+        description: 'Returns the user with the given username.',
         method: HTTPMethod.GET,
         url: '/users/:id',
         action: function (req, callback) {

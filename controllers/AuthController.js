@@ -20,6 +20,7 @@ module.exports.updateAuthUser = _updateAuthUser;
 
 function _auth() {
     return {
+        description: 'Authenticates the user with the given credentials.',
         method: HTTPMethod.POST,
         url: '/auth',
         action: function (req, callback) {
@@ -41,6 +42,7 @@ function _auth() {
 
 function _getAuth() {
     return {
+        description: 'Returns the current authentication.',
         method: HTTPMethod.GET,
         url: '/auth',
         action: function (req, callback) {
@@ -54,6 +56,7 @@ function _getAuth() {
 
 function _deleteAuth() {
     return {
+        description: 'Deauthenticates the user.',
         method: HTTPMethod.DELETE,
         url: '/auth',
         action: function (req, callback) {
@@ -65,6 +68,7 @@ function _deleteAuth() {
         }
     };
 }
+
 
 function _getAuthUser(req) {
     return ((req && req.session) ? req.session.user : null);

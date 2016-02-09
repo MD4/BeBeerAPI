@@ -12,6 +12,7 @@ var _actions = _getActions();
 
 function _get() {
     return {
+        description: 'Returns the informations you are currently seeing.',
         method: HTTPMethod.GET,
         url: '/',
         action: function (req, callback) {

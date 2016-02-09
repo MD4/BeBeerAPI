@@ -15,6 +15,7 @@ module.exports.getRatings = _getRatings();
 
 function _getBeers() {
     return {
+        description: 'Returns a paginated list of beers.',
         method: HTTPMethod.GET,
         url: '/beers',
         action: function (req, callback) {
@@ -32,6 +33,7 @@ function _getBeers() {
 
 function _getBeer() {
     return {
+        description: 'Returns a beer from its id.',
         method: HTTPMethod.GET,
         url: '/beers/:id',
         action: function (req, callback) {
@@ -45,6 +47,7 @@ function _getBeer() {
 
 function _rateBeer() {
     return {
+        description: 'Rate a beer.',
         method: HTTPMethod.POST,
         url: '/beers/:id/ratings',
         action: function (req, callback) {
@@ -69,6 +72,7 @@ function _rateBeer() {
 
 function _getRatings() {
     return {
+        description: 'Returns the given beer rating.',
         method: HTTPMethod.GET,
         url: '/beers/:id/ratings',
         action: function (req, callback) {
