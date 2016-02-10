@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node bin/www",
-    "test": "jshint **/*.js && mocha test/**/*.js"
+    "test": "jshint **/*.js && mocha test/**/*.js",
+    "makedoc": "node doc.js"
   },
   "repository": {
     "type": "git",
