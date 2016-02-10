@@ -48,6 +48,7 @@ function getAction(controller, controllerName) {
         return [
             '#### ' + actionConfig.action,
             action.description,
+            '\n',
             'URL: ```' + action.method.toUpperCase() + ' ' + action.url + '```',
             getSchema(controllerName, actionConfig.action)
         ].join('\n');
