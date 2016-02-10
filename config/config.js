@@ -14,7 +14,7 @@ module.exports = {
         test: false
     },
     db: {
-        uri: process.env.MONGODB_ADDON_URI || 'mongodb://127.0.0.1:27017/bebeer',
+        uri: process.env.MONGODB_ADDON_URI || process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/bebeer',
         sessionCollection: 'sessions'
     },
     session: {
