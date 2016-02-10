@@ -46,17 +46,17 @@ function _getBeers(options, callback) {
         .toArray(callback);
 }
 
-function _getBeer(id, callback) {
+function _getBeer(beerId, callback) {
     DatabaseHelper
         .getCollection(DatabaseHelper.CollectionsNames.BEERS)
-        .find({_id: +id})
+        .find({_id: beerId + ''})
         .limit(1)
         .next(function (err, result) {
             if (err) {
                 return callback(ErrorHelper.handleError(err));
             }
             if (!result) {
-                return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', id));
+                return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', beerId));
             }
             if (result.ratings) {
                 result.ratings = {
@@ -81,7 +81,7 @@ function _unrateBeer(userId, beerId, callback) {
                     {
                         $pull: {
                             'ratings': {
-                                beerId: +beerId
+                                beerId: beerId + ''
                             }
                         }
                     },
@@ -97,7 +97,7 @@ function _unrateBeer(userId, beerId, callback) {
             DatabaseHelper
                 .getCollection(DatabaseHelper.CollectionsNames.BEERS)
                 .update(
-                    {_id: +beerId},
+                    {_id: beerId + ''},
                     {
                         $pull: {
                             'ratings': {
@@ -131,7 +131,7 @@ function _rateBeer(userId, beerId, rate, callback) {
             DatabaseHelper
                 .getCollection(DatabaseHelper.CollectionsNames.BEERS)
                 .update(
-                    {_id: +beerId},
+                    {_id: beerId + ''},
                     {
                         '$push': {
                             'ratings': {
@@ -160,7 +160,7 @@ function _rateBeer(userId, beerId, rate, callback) {
                     {
                         '$push': {
                             'ratings': {
-                                beerId: +beerId,
+                                beerId: beerId + '',
                                 date: ratingDate,
                                 rate: rate
                             }
@@ -178,7 +178,7 @@ function _getRatings(beerId, callback) {
     DatabaseHelper
         .getCollection(DatabaseHelper.CollectionsNames.BEERS)
         .aggregate([
-            {$match: {_id: +beerId}},
+            {$match: {_id: beerId + ''}},
             {$project: {ratings: true}},
             {$unwind: '$ratings'},
             {$sort: {date: 1}},

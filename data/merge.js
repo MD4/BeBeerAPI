@@ -12,7 +12,7 @@ module.exports.getMergedData = function() {
         })[0];
 
         return {
-            _id: images.id,
+            _id: images.id + '',
             name: beer.name,
             country: details.country,
             brewery: details.brewery,

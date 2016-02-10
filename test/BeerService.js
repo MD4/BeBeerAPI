@@ -157,7 +157,7 @@ describe('Beer service', function () {
             expect(user.ratings).to.exist;
             expect(user.ratings).to.have.length.of(1);
             expect(user.ratings[0].rate).to.equal(3);
-            expect(user.ratings[0].beerId).to.equal(42);
+            expect(user.ratings[0].beerId).to.equal('42');
             expect(+user.ratings[0].date).to.be.below(+new Date());
         });
     });
@@ -214,7 +214,7 @@ describe('Beer service', function () {
             console.log(user);
             expect(user.ratings).to.have.length.of(1);
             expect(user.ratings[0].rate).to.equal(2);
-            expect(user.ratings[0].beerId).to.equal(42);
+            expect(user.ratings[0].beerId).to.equal('42');
             expect(+user.ratings[0].date).to.be.below(+new Date());
         });
     });
