@@ -4,6 +4,7 @@ var restify = require('restify');
 // exports
 
 module.exports.getBreweries = _getBreweries;
+module.exports.getBeers = _getBeers;
 
 // private
 
@@ -29,5 +30,22 @@ function _getBreweries(options, callback) {
             {'$skip': options.offset},
             {'$limit': options.count}
         ])
+        .toArray(callback);
+}
+
+function _getBeers(breweryId, callback) {
+    console.log(breweryId);
+    DatabaseHelper
+        .getCollection(DatabaseHelper.CollectionsNames.BEERS)
+        .find(
+            {brewery: breweryId},
+            {
+                _id: true,
+                name: true,
+                country: true,
+                brewery: true
+            }
+        )
+        .sort({name: 1})
         .toArray(callback);
 }
