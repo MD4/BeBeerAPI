@@ -21,7 +21,7 @@ function _Server(config, configControllers) {
     this.api.use(restify.queryParser());
     this.api.use(restify.bodyParser());
 
-    this.api.use(function(req, res, next) {
+    this.api.use(function (req, res, next) {
         req.body = req.body || {};
         req.params = req.params || {};
         next();
@@ -37,10 +37,17 @@ function _Server(config, configControllers) {
         })
     }));
 
+    this.api.use(function (req, res, next) {
+        if (!req.session) {
+            return next(new restify.errors.InternalServerError('Something wrong happened! [err#js-r-1]'));
+        }
+        next();
+    });
+
     this.api.on('uncaughtException', function (req, res, route, error) {
         console.error(route);
         console.error(error.stack);
-        res.send(new restify.errors.InternalServerError('Something wrong happened!'));
+        res.send(new restify.errors.InternalServerError('Something wrong happened! [err#js-ue-1]'));
     });
 
     this.mapUrls();
