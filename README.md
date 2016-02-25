@@ -3,11 +3,15 @@
 ### Root
 #### get
 Returns the informations you are currently seeing.
+
+
 URL: ```GET /```
 
 ### Beer
 #### getBeers
 Returns a paginated list of beers.
+
+
 URL: ```GET /beers```
 ##### URL parameters
 ###### count
@@ -32,6 +36,8 @@ maxLength: 100
 ```
 #### getBeer
 Returns a beer from its id.
+
+
 URL: ```GET /beers/:id```
 ##### URL parameters
 ###### id
@@ -44,6 +50,8 @@ maxLength: 10
 ```
 #### rateBeer
 Rate a beer.
+
+
 URL: ```POST /beers/:id/ratings```
 ##### URL parameters
 ###### id
@@ -64,6 +72,8 @@ required: true
 ```
 #### getRatings
 Returns the given beer rating.
+
+
 URL: ```GET /beers/:id/ratings```
 ##### URL parameters
 ###### id
@@ -77,6 +87,8 @@ maxLength: 10
 ### Brewery
 #### getBreweries
 Returns a paginated list of breweries.
+
+
 URL: ```GET /breweries```
 ##### URL parameters
 ###### count
@@ -101,6 +113,8 @@ maxLength: 100
 ```
 #### getBeers
 Returns the beers brewed by the given brewery.
+
+
 URL: ```GET /breweries/:id```
 ##### URL parameters
 ###### id
@@ -113,6 +127,8 @@ maxLength: 100
 ### User
 #### createUser
 Creates an user with the given data.
+
+
 URL: ```POST /users```
 ##### Request body
 ###### username
@@ -141,6 +157,8 @@ required: true
 ```
 #### getUser
 Returns the user with the given username.
+
+
 URL: ```GET /users/:id```
 ##### URL parameters
 ###### id
@@ -155,6 +173,8 @@ required: true
 ### Auth
 #### auth
 Authenticates the user with the given credentials.
+
+
 URL: ```POST /auth```
 ##### Request body
 ###### username
@@ -176,8 +196,12 @@ required: true
 ```
 #### getAuth
 Returns the current authentication.
+
+
 URL: ```GET /auth```
 
 #### deleteAuth
 Deauthenticates the user.
+
+
 URL: ```DEL /auth```

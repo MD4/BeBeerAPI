@@ -193,7 +193,7 @@ function _getRatings(beerId, callback) {
                 return callback(ErrorHelper.handleError(err));
             }
             if (!result) {
-                return callback(new restify.errors.ResourceNotFoundError('No beer with id \'%s\'', beerId));
+                return callback(null, []);
             }
             callback(null, result.ratings || []);
         });
