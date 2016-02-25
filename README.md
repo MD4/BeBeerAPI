@@ -111,11 +111,24 @@ default: ''
 minLength: 1
 maxLength: 100
 ```
+#### getBrewery
+Returns the brewery corresponding to the given name.
+
+
+URL: ```GET /breweries/:id```
+##### URL parameters
+###### id
+```
+type: 'string'
+default: ''
+minLength: 1
+maxLength: 100
+```
 #### getBeers
 Returns the beers brewed by the given brewery.
 
 
-URL: ```GET /breweries/:id```
+URL: ```GET /breweries/:id/beers```
 ##### URL parameters
 ###### id
 ```
