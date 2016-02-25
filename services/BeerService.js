@@ -181,11 +181,11 @@ function _getRatings(beerId, callback) {
             {$match: {_id: beerId + ''}},
             {$project: {ratings: true}},
             {$unwind: '$ratings'},
-            {$sort: {date: 1}},
             {$group: {
                 _id: '$_id',
                 ratings: {$push: '$ratings'}
-            }}
+            }},
+            {$sort: {date: 1}}
         ])
         .limit(1)
         .next(function (err, result) {

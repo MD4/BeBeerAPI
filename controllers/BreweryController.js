@@ -4,6 +4,7 @@ var HTTPMethod = require('../constants/HTTPMethod');
 // exports
 
 module.exports.getBreweries = _getBreweries();
+module.exports.getBrewery = _getBrewery();
 module.exports.getBeers = _getBeers();
 
 // private
@@ -26,11 +27,25 @@ function _getBreweries() {
     };
 }
 
+function _getBrewery() {
+    return {
+        description: 'Returns the brewery corresponding to the given name.',
+        method: HTTPMethod.GET,
+        url: '/breweries/:id',
+        action: function (req, callback) {
+            BreweryService.getBrewery(
+                req.params.id,
+                callback
+            );
+        }
+    };
+}
+
 function _getBeers() {
     return {
         description: 'Returns the beers brewed by the given brewery.',
         method: HTTPMethod.GET,
-        url: '/breweries/:id',
+        url: '/breweries/:id/beers',
         action: function (req, callback) {
             BreweryService.getBeers(
                 req.params.id,

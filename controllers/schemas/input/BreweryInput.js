@@ -27,6 +27,22 @@ module.exports.getBreweries = {
     }
 };
 
+module.exports.getBrewery = {
+    properties: {
+        params: {
+            type: 'object',
+            properties: {
+                id: {
+                    type: 'string',
+                    default: '',
+                    minLength: 1,
+                    maxLength: 100
+                }
+            }
+        }
+    }
+};
+
 module.exports.getBeers = {
     properties: {
         params: {
