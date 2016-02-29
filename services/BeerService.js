@@ -37,7 +37,8 @@ function _getBeers(options, callback) {
                 _id: true,
                 name: true,
                 country: true,
-                brewery: true
+                brewery: true,
+                image: true
             }
         )
         .sort({name: 1})
