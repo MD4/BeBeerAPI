@@ -121,11 +121,11 @@ function _unrateBeer(userId, beerId, callback) {
 
 function _rateBeer(userId, beerId, rate, callback) {
     var ratingDate = new Date();
-    async.series([
+    async.waterfall([
         function (cb) {
             UserService.getUser(userId, cb);
         },
-        function (cb) {
+        function (user, cb) {
             _unrateBeer(userId, beerId, cb);
         },
         function (cb) {
@@ -154,6 +154,9 @@ function _rateBeer(userId, beerId, rate, callback) {
                 );
         },
         function (cb) {
+            _getBeer(beerId, cb);
+        },
+        function (beer, cb) {
             DatabaseHelper
                 .getCollection(DatabaseHelper.CollectionsNames.USERS)
                 .update(
@@ -162,6 +165,7 @@ function _rateBeer(userId, beerId, rate, callback) {
                         '$push': {
                             'ratings': {
                                 beerId: beerId + '',
+                                beerName: beer.name,
                                 date: ratingDate,
                                 rate: rate
                             }
