@@ -56,7 +56,7 @@ function _getUser(id, callback) {
 
 function _getGravatarizedUser(user) {
     return extend(user, {
-        gravatar: 'http://www.gravatar.com/avatar/' + SecurityHelper.md5(user.email) + '?s=135'
+        gravatar: 'http://www.gravatar.com/avatar/' + SecurityHelper.md5(user.email) + '?s=250'
     });
 }
 
