@@ -17,6 +17,12 @@ function _Server(config, configControllers) {
 
     this.api = restify.createServer(this.config.api.info);
 
+    // Enabling CORS
+    this.api.use(function(req, res, next) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
     this.api.use(restify.acceptParser(this.api.acceptable));
     this.api.use(restify.queryParser());
     this.api.use(restify.bodyParser());
