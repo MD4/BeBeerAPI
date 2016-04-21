@@ -16,16 +16,6 @@ function _Server(config, configControllers) {
     this.configControllers = configControllers;
 
     this.api = restify.createServer(this.config.api.info);
-
-    // Enabling CORS
-    this.api.use(function (req, res, next) {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-        res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-        res.setHeader('Access-Control-Allow-Credentials', true);
-        res.setHeader('Access-Control-Max-Age', '86400');
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-        next();
-    });
     this.api.use(restify.acceptParser(this.api.acceptable));
     this.api.use(restify.queryParser());
     this.api.use(restify.bodyParser());
@@ -50,6 +40,16 @@ function _Server(config, configControllers) {
         if (!req.session) {
             return next(new restify.errors.InternalServerError('Something wrong happened! [err#js-r-1]'));
         }
+        next();
+    });
+
+    // Enabling CORS
+    this.api.use(function (req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Credentials', true);
+        res.setHeader('Access-Control-Max-Age', '86400');
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
         next();
     });
 
