@@ -9,6 +9,9 @@
     "test": "jshint **/*.js && mocha test/**/*.js",
     "makedoc": "node doc.js"
   },
+  "engines": {
+    "node": ">=5.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MD4/BeBeerAPI.git"
