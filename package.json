@@ -1,6 +1,6 @@
 {
   "name": "bebeerapi",
-  "version": "1.3.12",
+  "version": "1.3.13",
   "description": "BeBeer API !",
   "main": "app.js",
   "bin": "bin/www",
