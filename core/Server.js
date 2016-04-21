@@ -18,9 +18,10 @@ function _Server(config, configControllers) {
     this.api = restify.createServer(this.config.api.info);
 
     // Enabling CORS
-    this.api.use(function(req, res, next) {
+    this.api.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.setHeader('Access-Control-Allow-Credentials', true);
         next();
     });
     this.api.use(restify.acceptParser(this.api.acceptable));
@@ -73,13 +74,13 @@ _Server.prototype.mapUrls = function () {
         .keys(this.configControllers)
         .forEach(function (controllerName) {
             var controller = require('../controllers/' + controllerName + 'Controller');
-            var actions = this.configControllers[controllerName];
+            var actions = this.configControllers[ controllerName ];
             actions.forEach(function (actionConfig) {
                 var actionName = actionConfig.action;
-                var action = controller[actionName];
+                var action = controller[ actionName ];
                 console.log('[URL MAPPING] %s:%s -> %s %s', controllerName, actionName, action.method, action.url);
-                this.api[action.method](
-                    controller[actionName].url,
+                this.api[ action.method ](
+                    controller[ actionName ].url,
                     new ActionHandler(controller, controllerName, actionConfig)
                 );
             }.bind(this));
